@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Persistence:war exploded">
+    <output-path>$PROJECT_DIR$/target/solution</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Persistence/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Persistence" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.glassfish.main.extras:glassfish-embedded-web:3.1.2" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
