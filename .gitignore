@@ -1,0 +1,13 @@
+#maven
+target/
+#derby
+derby.log
+*.lck
+log/
+#eclipse
+.settings
+.classpath
+.project
+#intellij
+.idea
+
