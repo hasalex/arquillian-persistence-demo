@@ -30,7 +30,7 @@ public class ItemEJBTxIT {
                          .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                          .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
     }
-    
+
     @EJB ItemEJB itemEJB;
 
     @Test

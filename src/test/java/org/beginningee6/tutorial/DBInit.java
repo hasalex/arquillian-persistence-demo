@@ -8,9 +8,7 @@ import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.ejb.Stateless;
+import javax.ejb.*;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
@@ -22,9 +20,10 @@ public class DBInit {
     public static final int NUM_BOOKS = 3;
     public static final int NUM_CDS = 1;
     
-    @Resource(mappedName="jdbc/sample")
-    DataSource ds;
-    
+    @Resource(mappedName="jdbc/sample") DataSource ds;
+
+    @Resource SessionContext context;
+
     @Inject Logger logger;
     
     @PostConstruct
@@ -44,13 +43,7 @@ public class DBInit {
             
             connection.commit();
         } catch (SQLException e) {
-            if (connection != null) {
-                try {
-                    connection.rollback();
-                } catch (SQLException ex) {
-                    Logger.getLogger(DBInit.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            context.setRollbackOnly();
             logger.warning("Database initiaziation failed");
             for (Throwable ex : e) {
                 logger.warning("=> " + ex);

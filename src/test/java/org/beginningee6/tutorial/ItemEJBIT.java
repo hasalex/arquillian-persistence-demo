@@ -1,10 +1,14 @@
 package org.beginningee6.tutorial;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -14,29 +18,35 @@ import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 /**
  * @author Alexis Hassler - http://www.alexis-hassler.com
  */
-@RunWith(Arquillian.class)
+//@RunWith(Arquillian.class)
 public class ItemEJBIT {
 
-    @Deployment
-    public static JavaArchive deploy() {
-        return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(ItemEJB.class.getPackage())
-                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
-                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
-    }
+    @Mock EntityManager em;
+    @Mock Query namedQuery;
+    @Mock IsbnGenerator isbnGenerator;
+    @Mock Logger logger;
+    @InjectMocks ItemEJB itemEJB;
 
-    @EJB ItemEJB itemEJB ;
-
-    @EJB DBInit dbInit;
-
-    @Before
-    public void initDB() {
-        dbInit.initDatabase();
-    }
+//    @Deployment
+//    public static JavaArchive deploy() {
+//        return ShrinkWrap.create(JavaArchive.class)
+//                .addPackage(ItemEJB.class.getPackage())
+//                .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
+//                .addAsManifestResource(EmptyAsset.INSTANCE, "beans.xml");
+//    }
+    /* */
+//    @EJB DBInit dbInit;
+//    @Before
+//    public void initDB() {
+//        dbInit.initDatabase();
+//    }
 
     @Test
     public void shouldCreateCDReturnCreatedCD() throws Exception {
